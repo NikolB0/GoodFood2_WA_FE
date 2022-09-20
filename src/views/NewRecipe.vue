@@ -29,6 +29,7 @@
 import { Posts } from "@/services";
 import Card from "@/components/Card.vue";
 import store from "@/store.js";
+
 export default {
   data() {
     return {
@@ -38,7 +39,7 @@ export default {
       description: "",
     };
   },
-  name: "newpost",
+  name: "newrecipe",
   methods: {
     getImageBlob() {
       // Advanced: kako omotati klasičnu callback funkciju u Promise
@@ -64,8 +65,8 @@ export default {
         title: this.title,
         description: this.description,
       };
-      let newpost = await Posts.add(post);
-      console.log("Spremljeni post", newpost.data);
+      let newrecipe = await Posts.add(post);
+      console.log("Spremljeni post", newrecipe.data);
       this.imageData = null;
       this.$router.push({ name: "posts" });
     },

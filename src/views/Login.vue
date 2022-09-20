@@ -61,18 +61,8 @@ export default {
       console.log("Login Status: " + success);
 
       if (Auth.authenticated() == true) {
-        this.$router.push({ name: 'Home'})
-      }
-      
-      // firebase
-      //     .auth()
-      //     .signInWithEmailAndPassword(this.username, this.password)
-      //     .then((result) => {
-      //         console.log('Uspješna prijava', result); 
-      //     })
-      //     .catch(function(e) {        // e = error
-      //         console.error('Greška', e);
-      //     });
+        this.$router.push({ name: 'Recipes'})
+      }      
     },
   },
 }
@@ -88,5 +78,9 @@ export default {
 .btn:hover {  
   background-color:#dd6824 !important;
   border-color: grey !important;
+}
+
+.form-control {
+  margin-top: 10px !important;
 }
 </style>

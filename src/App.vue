@@ -6,7 +6,7 @@
                     <div class="col">
                         <nav class="navbar navbar-expand-lg navbar-light mb-2">
                             <router-link class="navbar-brand" :to="{ name: 'posts' }">
-                                <img src="/assets/logo.svg" height="60" />
+                                <img src="./assets/logo.png" height="60" style="margin-left: 10px !important" />
                             </router-link>
                             <button
                                 class="navbar-toggler"
@@ -21,23 +21,23 @@
                             </button>
 
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                                <form class="form-inline my-2 my-lg-0 mr-auto ml-5">
+                                <form class="form-inline my-2 my-lg-0 mr-auto ml-5" style="margin-left: 180px;">
                                     <input
-                                        v-model="searchTerm"
+                                        v-model="store.searchTerm"
                                         class="form-control mr-sm-2"
                                         type="search"
                                         placeholder="Pretraga..."
                                         aria-label="Search"
                                     />
                                 </form>
-                                <router-link v-if="!authenticated" class="btn btn-info my-2 my-sm-0 mr-2" to="/login">
+                                <router-link v-if="!auth.authenticated" class="btn btn-info my-2 my-sm-0 mr-2" style="margin-left:10px;" to="/login">
                                     Login
                                 </router-link>
-                                <span v-if="authenticated">
+                                <span v-if="auth.authenticated">
                                     <a @click="logout" class="btn btn-info my-2 my-sm-0 mr-2" href="#">Logout</a>
                                 </span>
                                 <router-link
-                                    v-if="!authenticated"
+                                    v-if="!auth.authenticated"
                                     class="btn btn-outline my-2 my-sm-0 mr-2"
                                     to="/signup"
                                 >
@@ -54,75 +54,29 @@
             <router-view />
         </div>
 
-        <!-- <div id="footer" class="text-center mt-5">Ovo je footer. (c) 2019 mi svi skupa.</div> -->
     </div>
 </template>
 
 <script type="text/javascript">
-import 'bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import store from '@/store';
-
-// firebase.auth().onAuthStateChanged((user) => {
-//  const currentRoute = router.currentRoute;
- 
-//  if (user) {
-//     // User is signed in.
-//     console.log('*** User', user.email);
-//     store.currentUser = user.email;
-
-//     if (!currentRoute.meta.needsAuth) {
-//         router.push({ name: 'home' });
-//     }
-//  } else {
-//     // User is not signed in.
-//     console.log('*** No user');
-//     store.currentUser = null;
-//     //kick me out
-//     if (currentRoute.meta.needsAuth) {
-//         router.push({ name: 'login' });
-//     }
-//   }
-// });
+import { Auth } from '@/services'
 
 export default {
   //name: 'app',
   data() {
+
     return {
-      store
+      store,
+      auth: Auth.state
     };
   },
   methods: {
+    
       logout() {
-        firebase.auth().signOut().then(() => this.$router.push({ name: 'login' }));
+        Auth.logout();
+        this.$router.go();
       },
   },
-  // mounted: {
-  //   firebase.auth().onAuthStateChanged(user => {
-  //           if (user) {
-  //               console.log('User is logged in with email ' + user.email);
-  //               this.authenticated = true;
-  //               db.collection('korisnici')
-  //                   .doc(user.email)
-  //                   .get()
-  //                   .then(doc => {
-  //                       if (doc.exists) {
-  //                           console.log('Document data:', doc.data());
-  //                           this.tipKorisnika = doc.data().tipProfila;
-  //                       } else {
-  //                           // doc.data() will be undefined in this case
-  //                           console.log('No such document!');
-  //                       }
-  //                   });
-  //               this.userEmail = user.email;
-  //               if (this.$route.name === 'login') this.$router.push({ name: 'posts' }).catch(err => console.log(err));
-  //           } else {
-  //               console.log('User is not logged in');
-  //               this.authenticated = false;
-  //               if (this.$route.name !== 'login') this.$router.push({ name: 'login' }).catch(err => console.log(err));
-  //           }
-  //       });
-  //     }
 };
 </script>
 
@@ -140,6 +94,7 @@ export default {
     border-bottom: #ccc 1px solid;
     margin-bottom: 20px;
     padding: 10px;
+    padding-left: 1px;
 }
 
 #nav.navbar {
@@ -155,6 +110,13 @@ export default {
       color: #dd6824;
     }
   }
+}
+
+.btn-info {  
+    color: white !important;
+    background: #dd6824 !important;
+    border-color: #dd6824 !important;
+    margin-left: 10px;
 }
 
 .btn-primary {

@@ -55,10 +55,9 @@
   
   <script>
   //umjesto firebase:  
-  import { Signup } from '@/services'
+  import { Auth, Signup } from '@/services'
   
   export default {
-    //name: "signup",
     data() {
       return {
         email: "",
@@ -68,20 +67,11 @@
     },
     methods: {
       async signup() {
-        if ((this.password = this.passwordRepeat)) {
+        if ((this.password == (this.passwordRepeat) && this.password != "")) {
           let success = await Signup.signup(this.email, this.password);
           console.log('Signup status: ', success);
-          this.$router.push({name: Login });
-          // firebase
-          //   .auth()
-          //   .createUserWithEmailAndPassword(this.email, this.password)
-          //   .then(function() {
-          //     console.log("Successful registration");
-          //   })
-          //   .catch(function(error) {
-          //     console.error("Error: ", error);
-          //   });
-          // console.log("Nastavak");
+          this.$router.push({name: 'login' });
+          
         } else {
           alert("Lozinke se ne podudaraju!");
         }
@@ -95,6 +85,7 @@
       text-align: right;
       background-color: rgb(159, 159, 159);
       border-color: grey;
+      margin-top: 10px;
     }
     
     .btn:hover {  

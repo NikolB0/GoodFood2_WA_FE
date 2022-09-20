@@ -40,6 +40,21 @@ const routes = [
     path: '/signup',
     name: 'signup',
     component: () => import(/* webpackChunkName: "login" */ '../views/Signup.vue')
+  },
+  {
+    path: '/recipes',
+    name: 'recipes',
+    component: () => import(/* webpackChunkName: "login" */ '../views/Recipes.vue')
+  },
+  {
+    path: '/selectedrecipe',
+    name: 'selectedrecipe',
+    component: () => import(/* webpackChunkName: "login" */ '../views/SelectedRecipe.vue')
+  },
+  {
+    path: '/newrecipe',
+    name: 'newrecipe',
+    component: () => import(/* webpackChunkName: "login" */ '../views/NewRecipe.vue')
   }
 
 

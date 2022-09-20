@@ -10,13 +10,13 @@
             <router-view :term="term" />
         </div>
         <div class="col-4">
-            <span v-if="authenticated">
+            <span v-if="auth.authenticated">
                 Current account: {{ userEmail }}
                 <br />
                 <br />
             </span>
             <router-link :to="{ name: 'newpost' }">
-                <button type="Novi post" class="btn btn-primary btn-block d-none d-md-block">Add Recipe</button>
+                <button v-if="auth.authenticated" type="Novi post" class="btn btn-primary btn-block d-none d-md-block" >Add Recipe</button>
             </router-link>
         </div>
     </div>
@@ -24,10 +24,14 @@
 
 <script>
 import store from '@/store.js';
+import { Auth } from '@/services';
+
 export default {
     props: ['term'],
     data() {
-        return store;
+        return {store,
+        auth: Auth.state
+        }
     },
     name: 'home'
 };
