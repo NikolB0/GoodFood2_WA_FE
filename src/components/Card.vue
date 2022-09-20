@@ -1,52 +1,44 @@
 <template>
-  <div class="card text-left align-middle">
+    <div class="card text-left align-middle">
         <div class="card-header text-left pl-3 pb-2">
-        <b class="card-title"> {{ info.email }} </b>
+            <b class="card-title"> {{ info.email }} </b>
         </div>
-    <div class="card-body p-0">
-        <img class="card-img-top" :src= "info.imageData" />
-    </div>    
-    <div id=title class="card-body pl-3 pt-0 pb-2">
-      <b>  {{ info.title }} </b>      
-    </div>
-    <div class="card-body pl-3 pt-0 pb-2">     
-      
-      {{ info.description }}
-    </div>
-    <div id="comm" class="card-footer text-muted text-left pl-3">
-      {{postedFromNow}}
-    </div>
+        <div class="card-body p-0">
+            <img class="card-img-top" :src="info.imageData" />
+        </div>
+        <div id=title class="card-body pl-3 pt-0 pb-2">
+            <b> {{ info.title }} </b>
+        </div>
+        <div class="card-body pl-3 pt-0 pb-2">
 
-    <div v-if="showcomments">
-                <div class="comments list-group">
-                    <a
-                        :key="c.posted_at"
-                        v-for="c in info.comments"
-                        class="animate list-group-item list-group-item-action flex-column align-items-start"
-                    >
-                        <div class="d-flex w-100 justify-content-between">
-                            <small>{{ formatTime(c.posted_at) }} by {{ c.email }}</small>
-                            <a class="link" @click="removeComment(c.id)">Delete</a>
-                        </div>
-                        <small>{{ c.comment }}</small>
-                    </a>
-                </div>
+            {{ info.description }}
+        </div>
+        <div id="comm" class="card-footer text-muted text-left pl-3">
+            {{postedFromNow}}
+        </div>
 
-                <form @submit.prevent="postComment" class="form-inline mb-5">
-                    <div class="form-group">
-                        <input
-                            v-model="newComment"
-                            type="text"
-                            class="form-control"
-                            id="imageUrl"
-                            placeholder="Any comment?"
-                        />
+        <div v-if="showcomments">
+            <div class="comments list-group">
+                <a :key="c.posted_at" v-for="c in info.comments"
+                    class="animate list-group-item list-group-item-action flex-column align-items-start">
+                    <div class="d-flex w-100 justify-content-between">
+                        <small>{{ formatTime(c.posted_at) }} by {{ c.email }}</small>
+                        <a class="link" @click="removeComment(c.id)">Delete</a>
                     </div>
-                    <button type="submit" class="btn btn-primary ml-2">Post</button>
-                </form>
+                    <small>{{ c.comment }}</small>
+                </a>
             </div>
 
-  </div>
+            <form @submit.prevent="postComment" class="form-inline mb-5">
+                <div class="form-group">
+                    <input v-model="newComment" type="text" class="form-control" id="imageUrl"
+                        placeholder="Any comment?" />
+                </div>
+                <button type="submit" class="btn btn-primary ml-2">Post</button>
+            </form>
+        </div>
+
+    </div>
 </template>
 
 <script>
@@ -55,9 +47,9 @@ import store from '@/store.js';
 import { Posts } from "@/services"
 
 export default {
-  props: ["info", "showcomments"],
-  name: "Card",
-  data() {
+    props: ["info", "showcomments"],
+    name: "Card",
+    data() {
         return {
             store,
             newComment: '',
@@ -94,35 +86,39 @@ export default {
             }
         },
     },
-  computed: {
-    postedFromNow() {
-      return moment(this.info.time).fromNow();
+    computed: {
+        postedFromNow() {
+            return moment(this.info.time).fromNow();
+        },
     },
-  },
 };
 </script>
 
 <style lang="scss">
-
 a {
     text-decoration: underline;
 }
+
 .card {
-  margin-bottom: 70px;
+    margin-bottom: 70px;
 }
+
 #time {
-  font-size: xx-small;
+    font-size: xx-small;
 }
+
 .comments {
     margin: 20px 0;
 }
+
 #comm {
-  font-size: small;
+    font-size: small;
 }
+
 #title {
-  margin-top: 12px;
-  font-size: x-large;
-  font-family: 'Lucida Bright';
+    margin-top: 12px;
+    font-size: x-large;
+    font-family: 'Lucida Bright';
 }
 
 
@@ -133,33 +129,36 @@ a {
   * See http://animista.net/license for more info. 
   * w: http://animista.net, t: @cssanimista
   * ---------------------------------------------- */
-  @-webkit-keyframes fade-in-fwd {
+@-webkit-keyframes fade-in-fwd {
     0% {
         -webkit-transform: translateZ(-80px);
         transform: translateZ(-80px);
         opacity: 0;
     }
+
     100% {
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
         opacity: 1;
     }
 }
+
 @keyframes fade-in-fwd {
     0% {
         -webkit-transform: translateZ(-80px);
         transform: translateZ(-80px);
         opacity: 0;
     }
+
     100% {
         -webkit-transform: translateZ(0);
         transform: translateZ(0);
         opacity: 1;
     }
 }
+
 .animate {
     -webkit-animation: fade-in-fwd 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
     animation: fade-in-fwd 1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
 }
-
 </style>
