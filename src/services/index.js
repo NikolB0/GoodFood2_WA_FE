@@ -1,5 +1,5 @@
-import axios from "axios";
-import $router from "@/router";
+import axios from 'axios'
+import $router from '@/router'
 
 let Service = axios.create({
   baseURL: "http://localhost:3001/",
@@ -86,8 +86,8 @@ let Posts = {
 let Signup = {
   async signup(username, password) {
     let response = await Service.post("/user", {
-      username,
-      password,
+      username: username,
+      password: password,
     });
   },
 };
@@ -95,12 +95,12 @@ let Signup = {
 let Auth = {
   async login(username, password) {
     let response = await Service.post("/auth", {
-      username,
-      password,
+      username: username,
+      password: password,
     });
     let user = response.data;
-
     localStorage.setItem("user", JSON.stringify(user));
+    return true;
   },
 
   logout() {
