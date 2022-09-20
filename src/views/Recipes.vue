@@ -1,10 +1,10 @@
 <template>
     <div>
-    <div  :key="card.id" v-for="card in cards">
+        <div :key="card.id" v-for="card in cards">
         <div @click="gotoDetails(card)">
             <Card :info="card" />
         </div>
-        </div>
+    </div>
     </div>
 </template>
 

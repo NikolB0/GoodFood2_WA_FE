@@ -20,7 +20,7 @@
                 <br />
                 <br />
             </span>
-            <router-link :to="{ name: 'newpost' }">
+            <router-link :to="{ name: 'newrecipe' }">
                 <button v-if="auth.authenticated" type="Novi post" class="btn btn-primary btn-block d-none d-md-block" >Add Recipe</button>
             </router-link>
         </div>

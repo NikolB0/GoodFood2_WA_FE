@@ -22,12 +22,11 @@
                     <a
                         :key="c.posted_at"
                         v-for="c in info.comments"
-                        href="#"
                         class="animate list-group-item list-group-item-action flex-column align-items-start"
                     >
                         <div class="d-flex w-100 justify-content-between">
                             <small>{{ formatTime(c.posted_at) }} by {{ c.email }}</small>
-                            <a @click="removeComment(c.id)" href="#">Delete</a>
+                            <a class="link" @click="removeComment(c.id)">Delete</a>
                         </div>
                         <small>{{ c.comment }}</small>
                     </a>
@@ -53,6 +52,7 @@
 <script>
 import moment from "moment";
 import store from '@/store.js';
+import { Posts } from "@/services"
 
 export default {
   props: ["info", "showcomments"],
@@ -72,22 +72,22 @@ export default {
             return moment(t.posted_at).fromNow();
         },
         async removeComment(commentId) {
-            let postId = this.info.id;
-            await Posts.Comments.delete(postId, commentId);
+            await Posts.Comments.delete(commentId);
             this.refresh();
         },
         async postComment() {
             if (this.newComment) {
                 let postId = this.info.id;
                 let comment = {
-                    username: this.global.username,
+                    username: this.store.username,
                     comment: this.newComment,
+                    postId: postId
                 };
                 try {
-                    await Posts.Comments.add(postId, comment);
+                    await Posts.Comments.add(comment);
                     this.refresh();
                 } catch (e) {
-                    console.error('Greška prilikom snimanja komentara', e);
+                    console.error('Error while posting comment', e);
                 } finally {
                     this.newComment = '';
                 }
@@ -103,6 +103,10 @@ export default {
 </script>
 
 <style lang="scss">
+
+a {
+    text-decoration: underline;
+}
 .card {
   margin-bottom: 70px;
 }

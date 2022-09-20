@@ -31,11 +31,14 @@ Service.interceptors.response.use(
 // sve za postove
 let Posts = {
   Comments: {
-    async add(postId, comment) {
-      await Service.post(`/posts/${postId}/comments/`, comment);
+    async add(comment) {
+      await Service.post(`/comments/`, comment);
     },
-    async delete(postId, commentId) {
-      await Service.delete(`/posts/${postId}/comments/${commentId}`);
+    async getAllForPost(postId) {
+      await Service.post(`/comments/${postId}`, comment);
+    },
+    async delete(commentId) {
+      await Service.delete(`/comments/${commentId}`);
     },
   },
   add(post) {

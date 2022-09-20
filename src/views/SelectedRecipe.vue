@@ -17,8 +17,8 @@ export default {
         };
     },
     async mounted() {
-        this.card = await Posts.getOne(this.id);
-        console.log(this.card)
+        console.log(this.$route.params.id)
+        this.card = await Posts.getOne(this.$route.params.id);
     },
     components: {
         Card

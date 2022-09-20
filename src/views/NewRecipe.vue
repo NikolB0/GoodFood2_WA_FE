@@ -10,7 +10,6 @@
    <input
               v-model="imageData"
               type="text"
-              maxlength="50"
               name="scriptPicture"
               class="form-control"
               id="scriptPicture"
