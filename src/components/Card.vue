@@ -4,7 +4,7 @@
         <b class="card-title"> {{ info.email }} </b>
         </div>
     <div class="card-body p-0">
-        <img class="card-img-top" :src="info.url" />
+        <img class="card-img-top" :src= "info.imageData" />
     </div>    
     <div id=title class="card-body pl-3 pt-0 pb-2">
       <b>  {{ info.title }} </b>      
@@ -52,13 +52,14 @@
 
 <script>
 import moment from "moment";
+import store from '@/store.js';
 
 export default {
   props: ["info", "showcomments"],
-  //name: "Card",
+  name: "Card",
   data() {
         return {
-            global: store,
+            store,
             newComment: '',
         };
     },
@@ -79,7 +80,7 @@ export default {
             if (this.newComment) {
                 let postId = this.info.id;
                 let comment = {
-                    email: this.global.userEmail,
+                    username: this.global.username,
                     comment: this.newComment,
                 };
                 try {

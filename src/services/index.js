@@ -42,13 +42,13 @@ let Posts = {
     return Service.post("/posts", post);
   },
   async getOne(id) {
-    let response = await Service.get(`/posts/${id}`);
+    let response = await Service.get(`/selectedrecipe/${id}`);
 
     let doc = response.data;
 
     return {
       id: doc._id,
-      url: doc.source,
+      imageData: doc.imageData,
       email: doc.createdBy,
       title: doc.title,
       description: doc.description,
@@ -73,7 +73,7 @@ let Posts = {
     return response.data.map((doc) => {
       return {
         id: doc._id,
-        url: doc.source,
+        imageData: doc.imageData,
         email: doc.createdBy,
         title: doc.title,
         description: doc.description,
@@ -105,6 +105,12 @@ let Auth = {
 
   logout() {
     localStorage.removeItem("user");
+  },
+  account() {
+    let user = Auth.getUser()
+    if (user) {
+      return user
+    }
   },
 
   getToken() {

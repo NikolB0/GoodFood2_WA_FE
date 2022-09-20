@@ -5,7 +5,7 @@
                 <div class="row">
                     <div class="col">
                         <nav class="navbar navbar-expand-lg navbar-light mb-2">
-                            <router-link class="navbar-brand" :to="{ name: 'posts' }">
+                            <router-link class="navbar-brand" :to="{ name: 'recipes' }">
                                 <img src="./assets/logo.png" height="60" style="margin-left: 10px !important" />
                             </router-link>
                             <button
@@ -57,8 +57,8 @@
     </div>
 </template>
 
-<script type="text/javascript">
-import store from '@/store';
+<script>
+import store from '@/store.js';
 import { Auth } from '@/services'
 
 export default {
@@ -76,6 +76,17 @@ export default {
         Auth.logout();
         this.$router.go();
       },
+       account(){
+      if(this.auth.authenticated){
+      this.user = Auth.account();
+      this.store = Auth.account();
+      console.log("Authenticated:", this.auth.authenticated)
+          store.username=this.store.username;
+      }
+    },
+    created() {
+      this.account();
+    }
   },
 };
 </script>

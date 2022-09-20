@@ -1,7 +1,9 @@
 <template>
-    <div v-if="store.authenticated">
-        <div @click="gotoDetails(card)" :key="card.id" v-for="card in cards">
+    <div>
+    <div  :key="card.id" v-for="card in cards">
+        <div @click="gotoDetails(card)">
             <Card :info="card" />
+        </div>
         </div>
     </div>
 </template>
@@ -11,6 +13,7 @@ import _ from 'lodash';
 import { Posts } from '@/services';
 import Card from '@/components/Card.vue';
 import store from '@/store.js';
+
 export default {
     data() {
         return {
@@ -29,11 +32,10 @@ export default {
     name: 'posts',
     methods: {
         async fetchPosts(term) {
-            term = term || store.searchTerm;
-            this.cards = await Posts.getAll(term);
+            this.cards = await Posts.getAll();
         },
         gotoDetails(card) {
-            this.$router.push({ path: `post/${card.id}` });
+            this.$router.push({ path: `/selectedrecipe/${card.id}` });
         }
     },
     components: {

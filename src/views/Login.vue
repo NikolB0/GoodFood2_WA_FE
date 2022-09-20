@@ -59,8 +59,8 @@
 
 <script>
 //umjesto firebase:
-import { Auth } from '@/services'
-import  store  from '@/store.js';
+import { Auth } from '@/services/index'
+import  store  from '@/store';
 
 export default {
   //name: "login",
@@ -74,13 +74,14 @@ export default {
   },
   methods: {
     async login() {    
+      console.log(Auth);
       let success = await Auth.login(this.username, this.password);
       console.log("Login Status: " + success);
 
-      this.store = Auth.account()
+      this.store = Auth.getUser()
       store.username=this.store.username;
-
-      this.$router.replace({ path: '/recipes'})    
+      store.isAuthenticated = true;
+      this.$router.replace({ path: '/'})    
   } 
 
   },

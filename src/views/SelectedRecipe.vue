@@ -1,7 +1,7 @@
 <template>
-    <div v-if="card">
+    <!-- <div v-if="card"> -->
         <Card :info="card" :showcomments="true" />
-    </div>
+    <!-- </div> -->
 </template>
 
 <script>
@@ -13,13 +13,13 @@ export default {
     props: ['id'],
     data() {
         return {
-            card: null
+            card: {}
         };
     },
     async mounted() {
         this.card = await Posts.getOne(this.id);
+        console.log(this.card)
     },
-    name: 'post-detail',
     components: {
         Card
     }

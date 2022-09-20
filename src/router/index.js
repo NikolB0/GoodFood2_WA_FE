@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import Posts from '../views/Recipes.vue'
+// import Posts from '../views/Home.vue'
 import store from '@/store'
 
 Vue.use(VueRouter)
@@ -11,25 +11,25 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home,
-    children: [
-      {
-        path: '',
-        name: 'posts',
-        component: Posts,
-      },
-      {
-        path: 'newpost',
-        name: 'newpost',
-        component: () => import(/* webpackChunkName: "newpost" */ '../views/NewRecipe.vue')
-      },
-      {
-        path: 'post/:id',
-        props: true,
-        name: 'post-detail',
-        component: () => import(/* webpackChunkName: "post-detail" */ '../views/SelectedRecipe.vue')
-      }
-    ]
-   
+    // children: [
+    //   // {
+    //   //   path: '',
+    //   //   name: 'posts',
+    //   //   component: Posts,
+    //   // },
+    //   {
+    //     path: 'newpost',
+    //     name: 'newpost',
+    //     component: () => import(/* webpackChunkName: "newpost" */ '../views/NewRecipe.vue')
+    //   },
+    //   {
+    //     path: 'post/:id',
+    //     props: true,
+    //     name: 'post-detail',
+    //     component: () => import(/* webpackChunkName: "post-detail" */ '../views/SelectedRecipe.vue')
+    //   }
+    // ]
+
   },
   {
     path: '/login',
@@ -47,7 +47,7 @@ const routes = [
     component: () => import(/* webpackChunkName: "login" */ '../views/Recipes.vue')
   },
   {
-    path: '/selectedrecipe',
+    path: '/selectedrecipe/:id',
     name: 'selectedrecipe',
     component: () => import(/* webpackChunkName: "login" */ '../views/SelectedRecipe.vue')
   },

@@ -7,7 +7,15 @@
       <input v-model="title" type="text" class="form-control" />
     </div>
 
-    <croppa :width="400" :height="250" v-model="imageData"></croppa>
+   <input
+              v-model="imageData"
+              type="text"
+              maxlength="50"
+              name="scriptPicture"
+              class="form-control"
+              id="scriptPicture"
+              placeholder="picture url"
+            />
 
     <div class="input-group">
       <div class="input-group-prepend">
@@ -21,7 +29,7 @@
       <!-- možda imageDecription -->
     </div>
 
-    <button type="submit" class="btn btn-primary ml-2">Post image</button>
+    <button type="submit"  class="btn btn-primary ml-2">Post image</button>
   </form>
 </template>
 
@@ -34,77 +42,24 @@ export default {
   data() {
     return {
       store,
-      imageData: null,
+      imageData: '',
       title: "",
       description: "",
     };
   },
-  name: "newrecipe",
+  // name: "newrecipe",
   methods: {
-    getImageBlob() {
-      // Advanced: kako omotati klasičnu callback funkciju u Promise
-      return new Promise((resolve, reject) => {
-        this.imageData.generateBlob((blobData) => {
-          if (blobData != null) {
-            resolve(blobData);
-          } else {
-            reject("Error with getting image.");
-          }
-        });
-      });
-    },
     async postImage() {
-      let blobData = await this.getImageBlob();
-      let imageName = this.store.userEmail + "/" + Date.now() + ".png";
-      let result = await storage.ref(imageName).put(blobData);
-      let url = await result.ref.getDownloadURL();
       let post = {
-        createdBy: this.store.userEmail,
+        createdBy: this.store.username,
         postedAt: Date.now(),
-        source: url,
         title: this.title,
         description: this.description,
+        imageData: this.imageData
       };
       let newrecipe = await Posts.add(post);
       console.log("Spremljeni post", newrecipe.data);
-      this.imageData = null;
-      this.$router.push({ name: "posts" });
-    },
-    postImageOld() {
-      let imageName = this.store.userEmail + "/" + Date.now() + ".png";
-      this.imageData.generateBlob((blobData) => {
-        if (blobData != null) {
-          storage
-            .ref(imageName)
-            .put(blobData)
-            .then((result) => {
-              result.ref
-                .getDownloadURL()
-                .then((url) => {
-                  db.collection("posts")
-                    .add({
-                      email: this.store.userEmail,
-                      posted_at: Date.now(),
-                      url: url,
-                    })
-                    .then((docRef) => {
-                      console.log("Document written with ID: ", docRef.id);
-                      this.imageData = null;
-                      this.$router.push({ name: "posts" });
-                    })
-                    .catch((e) => {
-                      console.error("Error adding document: ", error);
-                    });
-                })
-                .catch((e) => {
-                  console.error(e);
-                });
-            })
-            .catch((e) => {
-              console.error(e);
-            });
-        }
-      }); 
+      this.$router.push({ name: "recipes" });
     },
   },
 };
