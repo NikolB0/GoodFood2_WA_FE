@@ -22,7 +22,7 @@
                   class="form-control"
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
-                  placeholder="Email"
+                  placeholder="Username"
                 />
                 <!-- placeholder="Phone number, username, or email"-->
               </div>
@@ -81,7 +81,7 @@ export default {
       this.store = Auth.getUser()
       store.username=this.store.username;
       store.isAuthenticated = true;
-      this.$router.replace({ path: '/'})    
+      this.$router.replace({ path: '/recipes'})    
   } 
 
   },

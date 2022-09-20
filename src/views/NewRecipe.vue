@@ -1,4 +1,13 @@
 <template>
+ <div>
+      <h2
+        style="
+          font-family: 'Lucida Bright';
+          margin-top: 2rem;
+          margin-bottom: 1rem;"
+      >
+        Add Recipe
+      </h2>
   <form @submit.prevent="postRecipe" class="mb-5">
     <div class="input-group">
       <div class="input-group-prepend">
@@ -7,19 +16,24 @@
       <input v-model="title" type="text" class="form-control" />
     </div>
 
-    <input v-model="imageData" type="text" name="scriptPicture" class="form-control" id="scriptPicture"
-      placeholder="picture url" />
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <span class="input-group-text">URL</span>
+      </div>
+    <input v-model="imageData" type="text" name="scriptPicture" class="form-control" id="scriptPicture"/>
+   </div>
 
     <div class="input-group">
       <div class="input-group-prepend">
         <span class="input-group-text">Description</span>
+      </div>
         <textarea v-model="description" type="text" class="form-control"></textarea>
       </div>
       <!-- možda imageDecription -->
-    </div>
-
-    <button type="submit" class="btn btn-primary ml-2">Post image</button>
+   
+    <button type="submit" class="btn btn-primary ml-2" id="publishbttn">Publish</button>
   </form>
+</div>
 </template>
 
 <script>
@@ -81,6 +95,17 @@ img:hover {
   width: 200px;
 }
 
+#publishbttn {
+  text-align: right;
+  background-color: rgb(159, 159, 159);
+  border-color: grey;
+}
+
+#publishbttn:hover {
+  background-color: #dd6824 !important;
+  border-color: grey !important;
+}
+
 .croppa-container {
   border: 3px dashed gray;
   width: 400px;
@@ -90,5 +115,10 @@ img:hover {
 
 .input-group {
   margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.textarea {
+  height: 200px;
 }
 </style>

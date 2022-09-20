@@ -8,7 +8,7 @@
             <form @submit.prevent="signup">
               <div class="form-group">
                 <label form="email"
-                  >Email Address</label
+                  >Username</label
                 >
                 <input
                   type="email"
@@ -16,7 +16,7 @@
                   class="form-control"
                   id="email"
                   aria-describedby="emailHelp"
-                  placeholder="Enter e-mail address"
+                  placeholder="Enter username"
                 />
               </div>
               <div class="form-group">

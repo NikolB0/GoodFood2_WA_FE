@@ -1,9 +1,9 @@
 <template>
-    <div class="card text-left align-middle">
+    <div class="card text-left align-middle" style="width:700px;">
         <div class="card-header text-left pl-3 pb-2">
-            <b class="card-title"> {{ info.email }} </b>
+            <b class="card-title"> {{ info.username }} </b>
         </div>
-        <div class="card-body p-0">
+        <div class="card-body p-0" >
             <img class="card-img-top" :src="info.imageData" />
         </div>
         <div id=title class="card-body pl-3 pt-0 pb-2">
@@ -97,6 +97,10 @@ export default {
 <style lang="scss">
 a {
     text-decoration: underline;
+}
+
+template {
+    align-items: center;
 }
 
 .card {

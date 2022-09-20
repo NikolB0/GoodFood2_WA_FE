@@ -59,7 +59,7 @@ export default {
 
     logout() {
       Auth.logout();
-      this.$router.go("/");
+      this.$router.go("/login");
     },
     account() {
       if (this.auth.authenticated) {

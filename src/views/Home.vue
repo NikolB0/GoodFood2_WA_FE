@@ -6,14 +6,14 @@
                 <Card :info="card" />
             </div>
         </div>
-        <div class="col-sm-12 col-md-8">
+        <!-- <div class="col-sm-12 col-md-8">
             <router-link :to="{ name: 'newrecipe' }">
-                <button type="Novi post" style="margin-bottom: 10px" class="btn btn-primary btn-block d-md-none">
+                <button type="Novi post" style="margin-bottom: 10px" class="btn btn-primary btn-block d-md-none" id="publishbttn">
                     Add Recipe
                 </button>
             </router-link>
             <router-view :term="term" />
-        </div>
+        </div> -->
         <div class="col-4">
             <span v-if="auth.authenticated">
                 Current account: {{ store.username }}
@@ -77,3 +77,18 @@ export default {
     }
 };
 </script>
+
+<style scoped>
+
+#publishbttn {
+  text-align: right;
+  background-color: rgb(159, 159, 159);
+  border-color: grey;
+}
+
+#publishbttn:hover {
+  background-color: #dd6824 !important;
+  border-color: grey !important;
+}
+
+</style>
