@@ -1,10 +1,15 @@
 <template>
-    <div>
-        <div :key="card.id" v-for="card in cards">
-        <div @click="gotoDetails(card)">
-            <Card :info="card" />
+    <div style="display:flex; flex-direction: column; align-items: flex-end;">
+        <router-link :to="{ name: 'newrecipe' }">
+            <div type="Novi post" style="margin-bottom: 10px;" class="btn btn-primary btn-block">
+                Add Recipe
+            </div>
+        </router-link>
+        <div class="col-lg-12" :key="card.id" v-for="card in cards">
+            <div @click="gotoDetails(card)">
+                <Card :info="card" />
+            </div>
         </div>
-    </div>
     </div>
 </template>
 
@@ -22,7 +27,7 @@ export default {
         };
     },
     watch: {
-        'store.searchTerm': _.debounce(function(val) {
+        'store.searchTerm': _.debounce(function (val) {
             this.fetchPosts(val);
         }, 500)
     },

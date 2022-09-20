@@ -22,8 +22,8 @@ Service.interceptors.response.use(
   },
   (error) => {
     if (error.response.status == 401) {
-      Auth.logout();
-      $router.go();
+      // Auth.logout();
+      // $router.go();
     }
   }
 );

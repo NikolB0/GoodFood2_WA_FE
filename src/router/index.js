@@ -10,7 +10,8 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: Home,
+    component: () => import(/* webpackChunkName: "login" */ '../views/Recipes.vue')
+
     // children: [
     //   // {
     //   //   path: '',
